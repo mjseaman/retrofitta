@@ -22,14 +22,14 @@ angular.module('Property__c', []).factory('Property__c', function (AngularForceO
     //Describe the contact object
     var objDesc = {
         type: 'Property__c',
-        fields: ['air_flow_control__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'Account.Name'],
+        fields: ['air_flow_control__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'window_glass_type__c', 'window_glass_layers__c', 'zip_code__c', 'classification_type__c'],
         where: '',
-        orderBy: 'LastName',
+        orderBy: 'floor_area__c',
         limit: 20
     };
-    var Contact = AngularForceObjectFactory(objDesc);
+    var Property = AngularForceObjectFactory(objDesc);
 
-    return Contact;
+    return Property;
 });
 
 
