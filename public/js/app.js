@@ -18,6 +18,21 @@ angular.module('Contact', []).factory('Contact', function (AngularForceObjectFac
     return Contact;
 });
 
+angular.module('Property__c', []).factory('Property__c', function (AngularForceObjectFactory) {
+    //Describe the contact object
+    var objDesc = {
+        type: 'Property__c',
+        fields: ['air_flow_control__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'Account.Name'],
+        where: '',
+        orderBy: 'LastName',
+        limit: 20
+    };
+    var Contact = AngularForceObjectFactory(objDesc);
+
+    return Contact;
+});
+
+
 function HomeCtrl($scope, AngularForce, $location, $route) {
     var isOnline =  AngularForce.isOnline();
     var isAuthenticated = AngularForce.authenticated();
