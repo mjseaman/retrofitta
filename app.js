@@ -39,6 +39,14 @@ app.get('/index.html', function (req, res) {
     res.render("index", { client_id: client_id, app_url: app_url});
 });
 
+app.post('/hop/?*', function(req, res){
+ var body = req.body;
+ request({'url' : 'lblUrl',
+           'method': 'POST',
+            headers: {},
+            body: body}).pipe(res);
+
+});
 
 app.all('/proxy/?*', function (req, res) {
     log(req);
