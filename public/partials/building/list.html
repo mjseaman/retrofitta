@@ -52,16 +52,18 @@
         <form class="form-inline">
             <input type="text" ng-model="searchTerm" class="input-medium search-query" placeholder="Search">
             <button ng-click="doSearch(searchString)" class="btn btn-primary">Go</button>
-            <button ng-click="doCreate()" class="btn btn-default">&nbsp;+&nbsp;</button>
+            <a href="#/buildings/new" class="btn btn-primary">New</a>
         </form>
 
         <table class="table">
-            <tr ng-click="doView(building.Id)" ng-repeat="building in buildings">
-                <td> {{building.Name}}, {{building.zip_code__c}}
-                    <br/>
-                    <small><i>{{building.Climate_Zone__c}}</i></small>
-                </td>
-                <td><i class="icon-chevron-right"></i></td>
+            <tr ng-repeat="building in buildings">
+                <a href="#/buildings/{{building.Id}}/view">{{building.Name}} 
+                    <td> {{building.Name}}, {{building.zip_code__c}}
+                        <br/>
+                        <small><i>{{building.Climate_Zone__c}}</i></small>
+                    </td>
+                    <td><i class="icon-chevron-right"></i></td>
+                </a>
             </tr>
         </table>
     </div>

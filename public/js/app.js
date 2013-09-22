@@ -24,7 +24,7 @@ angular.module('Building__c', []).factory('Building__c', function (AngularForceO
     //Describe the building object
     var objDesc = {
         type: 'Building__c',
-        fields: ['Name', 'air_flow_control__c', 'Lighting__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'window_glass_type__c', 'window_glass_layers__c', 'zip_code__c', 'classification_type__c'],
+        fields: ['Id', 'Name', 'air_flow_control__c', 'Lighting__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'window_glass_type__c', 'window_glass_layers__c', 'zip_code__c', 'classification_type__c'],
         where: '',
         orderBy: 'floor_area__c',
         limit: 20
@@ -46,7 +46,7 @@ function HomeCtrl($scope, AngularForce, $location, $route) {
         if(!isAuthenticated) {//MobileWeb
             return $location.path('/login');
         } else {//Cordova
-            return $location.path('/contacts/');
+            return $location.path('/buildings/');
         }
     }
 
@@ -55,7 +55,7 @@ function HomeCtrl($scope, AngularForce, $location, $route) {
         $location.path('/login');
     } else if (AngularForce.refreshToken) { //If web, try to relogin using refresh-token
         AngularForce.login(function () {
-            $location.path('/contacts/');
+            $location.path('/buildings/');
             $scope.$apply();//Required coz sfdc uses jquery.ajax
         });
     } else {
@@ -66,14 +66,14 @@ function HomeCtrl($scope, AngularForce, $location, $route) {
 function LoginCtrl($scope, AngularForce, $location) {
     //Usually happens in Cordova
     if (AngularForce.authenticated()) {
-        return $location.path('/contacts/');
+        return $location.path('/buildings/');
     }
 
     $scope.login = function () {
         //If in visualforce, 'login' = initialize entity framework
         if (AngularForce.inVisualforce) {
            AngularForce.login(function() {
-            $location.path('/contacts/');
+            $location.path('/buildings/');
            });     
         } else {
             AngularForce.login();           
@@ -102,7 +102,7 @@ function CallbackCtrl($scope, AngularForce, $location) {
     //..coz oauth CB returns access_token in its own hash making it two hashes (1 from angular,
     // and another from oauth)
     $location.hash('');
-    $location.path('/contacts');
+    $location.path('/buildings');
 }
 
 function ContactListCtrl($scope, AngularForce, $location, Contact) {
@@ -132,13 +132,13 @@ function ContactListCtrl($scope, AngularForce, $location, Contact) {
         });
     };
 
-    $scope.doView = function (contactId) {
+    $scope.doView = function (resource, id) {
         console.log('doView');
-        $location.path('/view/' + contactId);
+        $location.path('/' + resource + '/view/' + id);
     };
 
-    $scope.doCreate = function () {
-        $location.path('/new');
+    $scope.doCreate = function (resource) {
+        $location.path(resource + '/new');
     }
 }
 
@@ -258,13 +258,13 @@ function BuildingListCtrl($scope, AngularForce, $location, Building__c) {
         });
     };
 
-    $scope.doView = function (buildingId) {
+    $scope.doView = function (resource, id) {
         console.log('doView');
-        $location.path('/view/' + buildingId);
+        $location.path('/' + resource + '/view/' + id);
     };
 
-    $scope.doCreate = function () {
-        $location.path('/new');
+    $scope.doCreate = function (resource) {
+        $location.path(resource + '/new');
     }
 }
 
@@ -279,32 +279,32 @@ function BuildingCreateCtrl($scope, $location, Building) {
     }
 }
 
-function BuildingViewCtrl($scope, AngularForce, $location, $routeParams, Building) {
+function BuildingViewCtrl($scope, AngularForce, $location, $routeParams, Building__c) {
 
     AngularForce.login(function () {
-        Building.get({id: $routeParams.buildingId}, function (building) {
+        Building__c.get({id: $routeParams.buildingId}, function (building) {
             self.original = building;
-            $scope.building = new Building(self.original);
+            $scope.building = new Building__c(self.original);
             $scope.$apply();//Required coz sfdc uses jquery.ajax
         });
     });
 
 }
 
-function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Property__c) {
+function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Building__c, $http) {
     var self = this;
 
     if ($routeParams.buildingId) {
         AngularForce.login(function () {
-            Building.get({id: $routeParams.buildingId},
+            Building__c.get({id: $routeParams.buildingId},
                 function (building) {
                     self.original = building;
-                    $scope.building = new Building(self.original);
+                    $scope.building = new Building__c(self.original);
                     $scope.$apply();//Required coz sfdc uses jquery.ajax
                 });
         });
     } else {
-        $scope.building = new Building();
+        $scope.building = new Building__c();
         //$scope.$apply();
     }
 
@@ -326,6 +326,12 @@ function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Prope
     };
 
     $scope.save = function () {
+        console.log ("in save");
+        lblpost($scope, $http);
+        console.log("SCOPE.PEER:");
+        console.log($scope.peer);
+        console.log("********");
+        
         if ($scope.building.Id) {
             $scope.building.update(function () {
                 $scope.$apply(function () {
@@ -334,7 +340,7 @@ function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Prope
 
             });
         } else {
-            Building.save($scope.building, function (building) {
+            Building__c.save($scope.building, function (building) {
                 var p = building;
                 $scope.$apply(function () {
                     $location.path('/view/' + p.Id || p.id);
@@ -350,4 +356,22 @@ function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Prope
             $location.path('/buildings');
         }
     }
+
+function lblpost($scope, $http) {
+    console.log("IN LBLPOST");
+  $http({
+        url: '/hop',
+        method: "POST",
+        data: $scope.property,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'addisonhuddy@gmail.com:22f3c696ca5837bc5c1e525b50740136d28388fd' 
+        }
+    }).success(function (data, status, headers, config) {
+            $scope.peer = data; // assign  $scope.persons here as promise is resolved here 
+        }).error(function (data, status, headers, config) {
+            $scope.status = status;
+        });
+
+}
 }

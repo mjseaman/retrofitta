@@ -63,8 +63,8 @@ app.config(function ($routeProvider) {
         when('/contacts/:contactId/edit', {controller: ContactDetailCtrl, templateUrl: 'partials/contact/edit.html'}).
         when('/contacts/new', {controller: ContactDetailCtrl, templateUrl: 'partials/contact/edit.html'}).
         when('/buildings', {controller: BuildingListCtrl, templateUrl: 'partials/building/list.html'}).
-        when('/buildings/view/:buildingId', {controller: BuildingViewCtrl, templateUrl: 'partials/building/view.html'}).
-        when('/buildings/edit/:buildingId', {controller: BuildingDetailCtrl, templateUrl: 'partials/building/edit.html'}).
+        when('/buildings/:buildingId/view', {controller: BuildingViewCtrl, templateUrl: 'partials/building/view.html'}).
+        when('/buildings/:buildingId/edit', {controller: BuildingDetailCtrl, templateUrl: 'partials/building/edit.html'}).
         when('/buildings/new', {controller: BuildingDetailCtrl, templateUrl: 'partials/building/edit.html'}).
         otherwise({redirectTo: '/'});
 });
