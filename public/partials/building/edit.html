@@ -1,0 +1,52 @@
+<form class="well" name="myForm">
+    <div class="control-group" ng-class="{error: myForm.Name.$invalid}">
+        <label>Nickname</label>
+        <input type="text" name="Name" ng-model="building.Name"/>
+
+        <label>Zip Code</label>
+        <input type="text" name="Zip_Code" ng-model="building.zip_code__c" required/>
+
+        <label>Classification Type</label>
+        <input type="text" name="classification_type__c" ng-model="building.classification_type__c"/>
+
+        <label>Climate Zone</label>
+        <input type="text" name="Climate_Zone__c" ng-model="building.Climate_Zone__c"/>
+
+        <label>Floor Area</label>
+        <input type="text" name="floor_area__c" ng-model="building.floor_area__c"/>
+
+        <label>Heating</label>
+        <input type="text" name="Heating__c" ng-model="building.Heating__c"/>
+
+        <label>Cooling</label>
+        <input type="text" name="Cooling__c" ng-model="building.Cooling__c"/>
+
+        <label>Window Glass Layers</label>
+        <input type="text" name="window_glass_layers__c" ng-model="building.window_glass_layers__c"/>
+
+        <label>Window Glass Type</label>
+        <input type="text" name="window_glass_type__c" ng-model="building.window_glass_type__c"/>
+
+        <label>Air Flow Control</label>
+        <input type="text" name="air_flow_control__c" ng-model="building.air_flow_control__c"/>
+
+        <label>Wall Insulation R Value</label>
+        <input type="text" name="wall_insulation_r_value__c" ng-model="wall_insulation_r_value__c"/>
+
+
+        <input disabled="disabled" type="hidden" name="Id" ng-model="contact.Id">
+    </div>
+
+
+    <p style='text-align: center;padding-bottom: 30px;padding-top: 40px;'>
+        <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid"
+                class="btn btn-primary">Save
+        </button>
+        <button ng-click="destroy()"
+                ng-show="contact.Id" class="btn btn-danger">Delete
+        </button>
+        <button ng-click="doCancel()" class="btn">Cancel</button>
+    </p>
+
+</form>
+

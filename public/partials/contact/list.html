@@ -14,7 +14,7 @@
         </div>
 
         <div style="float: right">
-            <a href="#/new" class="btn btn-primary">New</a>
+            <a href="#/contacts/new" class="btn btn-primary">New</a>
         </div>
 
 
@@ -33,7 +33,7 @@
 
             <tr ng-repeat="contact in contacts">
                 <td class='hidden-phone'>{{contact.Id}}</td>
-                <td><a href="#/view/{{contact.Id}}">{{contact.FirstName}} {{contact.LastName}}</a></td>
+                <td><a href="#/contacts/{{contact.Id}}/view">{{contact.FirstName}} {{contact.LastName}}</a></td>
                 <td>{{contact.Account.Name}}</td>
                 <td class='hidden-phone'>{{contact.Title}}</td>
                 <td>{{contact.Phone}}</td>

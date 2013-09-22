@@ -59,13 +59,13 @@ app.config(function ($routeProvider) {
         when('/logout', {controller: LoginCtrl, templateUrl: 'partials/logout.html'}).
         when('/callback', {controller: CallbackCtrl, templateUrl: 'partials/callback.html'}).
         when('/contacts', {controller: ContactListCtrl, templateUrl: 'partials/contact/list.html'}).
-        when('/view/:contactId', {controller: ContactViewCtrl, templateUrl: 'partials/contact/view.html'}).
-        when('/edit/:contactId', {controller: ContactDetailCtrl, templateUrl: 'partials/contact/edit.html'}).
-        when('/new', {controller: ContactDetailCtrl, templateUrl: 'partials/contact/edit.html'}).
+        when('/contacts/:contactId/view', {controller: ContactViewCtrl, templateUrl: 'partials/contact/view.html'}).
+        when('/contacts/:contactId/edit', {controller: ContactDetailCtrl, templateUrl: 'partials/contact/edit.html'}).
+        when('/contacts/new', {controller: ContactDetailCtrl, templateUrl: 'partials/contact/edit.html'}).
         when('/buildings', {controller: BuildingListCtrl, templateUrl: 'partials/building/list.html'}).
-        // when('/view/:propertyId', {controller: PropertyViewCtrl, templateUrl: 'partials/property/view.html'}).
-        // when('/edit/:propertyId', {controller: PropertyDetailCtrl, templateUrl: 'partials/property/edit.html'}).
-        // when('/new', {controller: PropertyDetailCtrl, templateUrl: 'partials/property/edit.html'}).
+        when('/buildings/view/:buildingId', {controller: BuildingViewCtrl, templateUrl: 'partials/building/view.html'}).
+        when('/buildings/edit/:buildingId', {controller: BuildingDetailCtrl, templateUrl: 'partials/building/edit.html'}).
+        when('/buildings/new', {controller: BuildingDetailCtrl, templateUrl: 'partials/building/edit.html'}).
         otherwise({redirectTo: '/'});
 });
 
