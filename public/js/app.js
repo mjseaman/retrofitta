@@ -339,23 +339,53 @@ function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Build
     $scope.save = function () {
         console.log ("in save");
         // lblpost($scope, $http);
-        
+        $scope.lbl_building = {
+                'filters': {
+                    'state': ['CA', 'IL', 'OR'],
+                    'facility_type': ['Retail - Big Box (> 50K sf)']
+                },
+                'number_of_bins': 25
+        };
+        console.log($scope.lbl_building);
+
+        $http({
+            url: '/hop',
+            method: "POST",
+            data: $scope.lbl_building,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).success(function (data, status, headers, config) {
+            $scope.peer = data; // assign  $scope.persons here as promise is resolved here
+            debugger;
+            $scope.updateSF(); 
+        }).error(function (data, status, headers, config) {
+            $scope.status = status;
+             $scope.updateSF(); 
+        });
+       // debugger;
+       // console.log(JSON.stringify($scope.building));
+
+    };
+
+    $scope.updateSF = function() {
         if ($scope.building.Id) {
             $scope.building.update(function () {
                 $scope.$apply(function () {
                     $location.path('/view/' + $scope.building.Id);
                 });
+          //  $scope.$apply();
 
             });
         } else {
             Building__c.save($scope.building, function (building) {
                 var p = building;
-                $scope.$apply(function () {
+                //$scope.$apply(function () {
                     $location.path('/view/' + p.Id || p.id);
-                });
+                //});
             });
-        }
-    };
+        }   
+    }
 
     $scope.doCancel = function () {
         if ($scope.building.Id) {
@@ -364,29 +394,4 @@ function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Build
             $location.path('/buildings');
         }
     }
-
-
-// function lblpost($scope, $http) {
-//     console.log("IN LBLPOST");
-//     $scope.building = {
-//         'filters': {
-//             'state': ['CA', 'IL', 'OR'],
-//             'facility_type': ['Retail - Big Box (> 50K sf)']
-//         },
-//         'number_of_bins': 25
-//     };
-//   $http({
-//         url: '/hop',
-//         method: "POST",
-//         body: $scope.building,
-//         headers: {
-//             'Content-Type': 'application/json',
-//             'Authorization': 'addisonhuddy@gmail.com:22f3c696ca5837bc5c1e525b50740136d28388fd' 
-//         }
-//     }).success(function (data, status, headers, config) {
-//             $scope.peer = data; // assign  $scope.persons here as promise is resolved here 
-//         }).error(function (data, status, headers, config) {
-//             $scope.status = status;
-//         });
-// }
 }

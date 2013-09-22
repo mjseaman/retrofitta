@@ -40,6 +40,8 @@ app.get('/index.html', function (req, res) {
 });
 
 app.post('/hop/?*', function (req, res) {
+    console.log("BODY");
+    console.log(JSON.stringify(req.body));
  var body = req.body;
  var headers = req.headers;
  console.log("BODY:");
@@ -48,9 +50,9 @@ app.post('/hop/?*', function (req, res) {
            'method': 'POST',
             'headers': {
                 'Content-Type': 'application/json',
-                'Authorization': 'ApiKey %s:%s' % ('mitchel.seaman@gmail.com', 'a4b167aaf2bbd8c3c57aaff9f0d51ef60df3decd')
+                'Authorization': 'ApiKey mitchel.seaman@gmail.com:a4b167aaf2bbd8c3c57aaff9f0d51ef60df3decd'
             },
-            'body': body
+            'body':  JSON.stringify(body)
         }).pipe(res);
 });
 
