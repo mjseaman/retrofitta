@@ -1,55 +1,167 @@
-<form class="well" name="myForm">
-    <div class="control-group" ng-class="{error: myForm.Name.$invalid}">
-        <label>Nickname</label>
-        <input type="text" name="Name" ng-model="building.Name"/>
+<div class="well">
+    <form name="myForm" role="form">
+        <div class="form-group">
+            <label for="Name">Nickname</label>
+            <input class="form-control" type="text" name="Name" ng-model="building.Name"/>
+        </div>
 
-        <label>Zip Code</label>
-        <input type="text" name="Zip_Code" ng-model="building.zip_code__c"/>
+        <div class="form-group">
+            <label>Zip Code</label>
+            <input class="form-control" type="text" name="Zip_Code" ng-model="building.zip_code__c"/>
+        </div>
 
-        <label>Classification Type</label>
-        <input type="text" name="classification_type__c" ng-model="building.classification_type__c"/>
+        <div class="form-group">
+            <label>Classification Type</label>
+            <select class="form-control" name="classification_type__c" ng-model="building.classification_type__c">
+                <option>Commercial</option>
+                <option>Residential</option>
+            </select>
+        </div>  
 
-        <label>Climate Zone</label>
-        <input type="text" name="Climate_Zone__c" ng-model="building.Climate_Zone__c"/>
+        <div class="form-group">
+            <label>Climate Zone</label>
+            <select class="form-control" name="Climate_Zone__c" ng-model="building.Climate_Zone__c">
+                <option>1A, Very Hot - Humid (Miami, FL)</option>
+                <option>2A, Hot - Humid (Houston, TX)</option>
+                <option>2B, Hot - Dry (Phoenix, AZ)</option>
+                <option>3A, Warm - Humid (Memphis, TN)</option>
+                <option>3B, Warm - Dry (El Paso, TX)</option>
+                <option>3C, Warm - Marine (San Francisco, CA)</option>
+                <option>4A, Mixed - Humid (Baltimore, MD)</option>
+                <option>4B, Mixed - Dry (Albuquerque, NM)</option>
+                <option>4C, Mixed - Marine (Salem, OR)</option>
+                <option>5A, Cool - Humid (Chicago, IL)</option>
+                <option>5B, Cool - Dry (Boise, ID)</option>
+                <option>6A, Cold - Humid (Burlington, VT)</option>
+                <option>6B, Cold - Dry (Helena, MT)</option>
+                <option>7, Very Cold (Duluth, MN)</option>
+                <option>8, Subarctic (Fairbanks, AK)</option>
+            </select>
+        </div>
 
-        <label>Floor Area</label>
-        <input type="text" name="floor_area__c" ng-model="building.floor_area__c"/>
+        <div class="form-group">
+            <label>Floor Area (Sq. ft.)</label>
+            <input class="form-control" type="text" name="floor_area__c" ng-model="building.floor_area__c"/>
+        </div>
 
-        <label>Heating</label>
-        <input type="text" name="Heating__c" ng-model="building.Heating__c"/>
+        <div class="form-group">
+            <label>Heating</label>
+            <select class="form-control" name="Heating__c" ng-model="building.Heating__c">
+                <option>PTAC</option>
+                <option>Unknown</option>
+                <option>None</option>
+                <option>Furnace</option>
+                <option>Heat Pump - Uncategorized</option>
+                <option>Central Heating</option>
+                <option>Boiler - Uncategorized</option>
+                <option>Heat Pump - Air Source</option>
+                <option>Resistance Heating</option>
+                <option>Boiler - Hot Water</option>
+                <option>Heat Pump - Water Loop</option>
+                <option>Boiler - Steam</option>
+                <option>Perimeter Baseboard</option>
+                <option>District Steam</option>
+                <option>Radiator</option>
+            </select>
+        </div>
 
-        <label>Cooling</label>
-        <input type="text" name="Cooling__c" ng-model="building.Cooling__c"/>
+        <div class="form-group">
+            <label>Cooling</label>
+            <select class="form-control" name="Cooling__c" ng-model="building.Cooling__c">
+                <option>PTAC</option>
+                <option>Unknown</option>
+                <option>Heat Pump - Uncategorized</option>
+                <option>Split AC System</option>
+                <option>Central Air Conditioning</option>
+                <option>Condenser</option>
+                <option>Chiller - Uncategorized</option>
+                <option>Cooling Tower</option>
+                <option>None</option>
+                <option>Packaged Direct Expansion</option>
+                <option>Heat Pump - Air Source</option>
+                <option>No cooling</option>
+                <option>Cooling Tower - Uncategorized</option>
+                <option>Heat Pump - Water Loop</option>
+                <option>Chiller - Absorption</option>
+                <option>Evaporative Cooler</option>
+                <option>District Chilled Water</option>
+            </select>
+        </div>
 
-        <label>Lighting</label>
-        <input type="text" name="Lighting__c" ng-model="building.Lighting__c"/>
+        <div class="form-group">
+            <label>Lighting</label>
+            <select class="form-control" type="text" name="Lighting__c" ng-model="building.Lighting__c">
+                <option>None</option>
+                <option>Fluorescent - T12</option>
+                <option>LED</option>
+                <option>Incandescent</option>
+                <option>Fluorescent - T8</option>
+                <option>Sodium - High Pressure</option>
+                <option>Compact Fluorescent</option>
+                <option>Metal Halide</option>
+                <option>Halogen</option>
+                <option>Other / Combination</option>
+                <option>Mercury Vapor</option>
+                <option>Fluorescent - Uncategorized</option>
+                <option>Sodium - Low Pressure</option>
+                <option>Fluorescent - T5</option>
+            </select>
+        </div>
 
-        <label>Window Glass Layers</label>
-        <input type="text" name="window_glass_layers__c" ng-model="building.window_glass_layers__c"/>
+        <div class="form-group">
+            <label>Window Glass Layers</label>
+            <select class="form-control" name="window_glass_layers__c" ng-model="building.window_glass_layers__c">
+                <option>None</option>
+                <option>Single-pane</option>
+                <option>Double-pane</option>
+                <option>Triple-pane</option>
+                <option>Unknown</option>
+            </select>
+        </div>
 
-        <label>Window Glass Type</label>
-        <input type="text" name="window_glass_type__c" ng-model="building.window_glass_type__c"/>
+        <div class="form-group">
+            <label>Window Glass Type</label>
+            <select class="form-control" type="text" name="window_glass_type__c" ng-model="building.window_glass_type__c">
+                <option>None</option>
+                <option>Tinted</option>
+                <option>Clear</option>
+                <option>Reflective</option>
+                <option>Other / Combination</option>
+                <option>Low-e</option>
+                <option>Unknown</option>
+                <option>High Performance</option>
+            </select>
+        </div>
 
-        <label>Air Flow Control</label>
-        <input type="text" name="air_flow_control__c" ng-model="building.air_flow_control__c"/>
+        <div class="form-group">
+            <label>Air Flow Control</label>
+            <select class="form-control" type="text" name="air_flow_control__c" ng-model="building.air_flow_control__c">
+                <option>Unknown</option>
+                <option>Variable Volume</option>
+                <option>Constant Volume</option>
+            </select>
+        </div>
 
-        <label>Wall Insulation R Value</label>
-        <input type="text" name="wall_insulation_r_value__c" ng-model="wall_insulation_r_value__c"/>
+        <div class="form-group">
+            <label>Wall Insulation R Value (0 to 80)</label>
+            <input class="form-control" type="text" name="wall_insulation_r_value__c" ng-model="wall_insulation_r_value__c"/>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" disabled="disabled" type="hidden" name="Id" ng-model="contact.Id">
+        </div>
 
 
-        <input disabled="disabled" type="hidden" name="Id" ng-model="contact.Id">
-    </div>
+        <p style='text-align: center;padding-bottom: 30px;padding-top: 40px;'>
+            <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid"
+                    class="btn btn-primary">Save
+            </button>
+            <button ng-click="destroy()"
+                    ng-show="building.Id" class="btn btn-danger">Delete
+            </button>
+            <button ng-click="doCancel()" class="btn">Cancel</button>
+        </p>
 
-
-    <p style='text-align: center;padding-bottom: 30px;padding-top: 40px;'>
-        <button ng-click="save()" ng-disabled="isClean() || myForm.$invalid"
-                class="btn btn-primary">Save
-        </button>
-        <button ng-click="destroy()"
-                ng-show="building.Id" class="btn btn-danger">Delete
-        </button>
-        <button ng-click="doCancel()" class="btn">Cancel</button>
-    </p>
-
-</form>
+    </form>
+</div>
 

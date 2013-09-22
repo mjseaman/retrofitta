@@ -39,12 +39,17 @@ app.get('/index.html', function (req, res) {
     res.render("index", { client_id: client_id, app_url: app_url});
 });
 
-app.post('/hop/?*', function(req, res){
+app.post('/hop/?*', function (req, res) {
  var body = req.body;
  var headers = req.headers;
+ console.log("BODY:");
+ console.log(body);
  request({'url' : 'https://bpd.lbl.gov/api/v1/analyze/peers/',
            'method': 'POST',
-            'headers': headers,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'ApiKey %s:%s' % ('mitchel.seaman@gmail.com', 'a4b167aaf2bbd8c3c57aaff9f0d51ef60df3decd')
+            },
             'body': body
         }).pipe(res);
 });
