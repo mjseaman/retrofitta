@@ -6,6 +6,7 @@
  */
 angular.module('Contact', []).factory('Contact', function (AngularForceObjectFactory) {
     //Describe the contact object
+    console.log("in contact module");
     var objDesc = {
         type: 'Contact',
         fields: ['FirstName', 'LastName', 'Title', 'Phone', 'Email', 'Id', 'Account.Name'],
@@ -18,18 +19,19 @@ angular.module('Contact', []).factory('Contact', function (AngularForceObjectFac
     return Contact;
 });
 
-angular.module('Property__c', []).factory('Property__c', function (AngularForceObjectFactory) {
-    //Describe the contact object
+angular.module('Building', []).factory('Building__c', function (AngularForceObjectFactory) {
+    console.log("in building module");
+    //Describe the building object
     var objDesc = {
-        type: 'Property__c',
+        type: 'Building__c',
         fields: ['air_flow_control__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'window_glass_type__c', 'window_glass_layers__c', 'zip_code__c', 'classification_type__c'],
         where: '',
         orderBy: 'floor_area__c',
         limit: 20
     };
-    var Property = AngularForceObjectFactory(objDesc);
+    var Building = AngularForceObjectFactory(objDesc);
 
-    return Property;
+    return Building;
 });
 
 
@@ -154,6 +156,7 @@ function ContactCreateCtrl($scope, $location, Contact) {
 function ContactViewCtrl($scope, AngularForce, $location, $routeParams, Contact) {
 
     AngularForce.login(function () {
+        console.log($scope);
         Contact.get({id: $routeParams.contactId}, function (contact) {
             self.original = contact;
             $scope.contact = new Contact(self.original);
@@ -220,6 +223,131 @@ function ContactDetailCtrl($scope, AngularForce, $location, $routeParams, Contac
             $location.path('/view/' + $scope.contact.Id);
         } else {
             $location.path('/contacts');
+        }
+    }
+}
+
+//**************** BUILDING CONTROLLERS ******************//
+
+function BuildingListCtrl($scope, AngularForce, $location, Building) {
+    if (!AngularForce.authenticated()) {
+        return $location.path('/home');
+    }
+
+    console.log("In BuildingListCtrl");
+
+    $scope.searchTerm = '';
+    $scope.working = false;
+
+    Building.query(function (data) {
+        $scope.buildings = data.records;
+        $scope.$apply();//Required coz sfdc uses jquery.ajax
+    }, function (data) {
+        alert('Query Error');
+    });
+
+    $scope.isWorking = function () {
+        return $scope.working;
+    };
+
+    $scope.doSearch = function () {
+        Contact.search($scope.searchTerm, function (data) {
+            $scope.contacts = data;
+            $scope.$apply();//Required coz sfdc uses jquery.ajax
+        }, function (data) {
+        });
+    };
+
+    $scope.doView = function (buildingId) {
+        console.log('doView');
+        $location.path('/view/' + buildingId);
+    };
+
+    $scope.doCreate = function () {
+        $location.path('/new');
+    }
+}
+
+function BuildingCreateCtrl($scope, $location, Building) {
+    $scope.save = function () {
+        Building.save($scope.building, function (building) {
+            var p = building;
+            $scope.$apply(function () {
+                $location.path('/view/' + p.Id);
+            });
+        });
+    }
+}
+
+function BuildingViewCtrl($scope, AngularForce, $location, $routeParams, Building) {
+
+    AngularForce.login(function () {
+        Building.get({id: $routeParams.buildingId}, function (building) {
+            self.original = building;
+            $scope.building = new Building(self.original);
+            $scope.$apply();//Required coz sfdc uses jquery.ajax
+        });
+    });
+
+}
+
+function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Property__c) {
+    var self = this;
+
+    if ($routeParams.buildingId) {
+        AngularForce.login(function () {
+            Building.get({id: $routeParams.buildingId},
+                function (building) {
+                    self.original = building;
+                    $scope.building = new Building(self.original);
+                    $scope.$apply();//Required coz sfdc uses jquery.ajax
+                });
+        });
+    } else {
+        $scope.building = new Building();
+        //$scope.$apply();
+    }
+
+    $scope.isClean = function () {
+        return angular.equals(self.original, $scope.building);
+    }
+
+    $scope.destroy = function () {
+        self.original.destroy(
+            function () {
+                $scope.$apply(function () {
+                    $location.path('/buildings');
+                });
+            },
+            function (errors) {
+                alert("Could not delete building!\n" + JSON.parse(errors.responseText)[0].message);
+            }
+        );
+    };
+
+    $scope.save = function () {
+        if ($scope.building.Id) {
+            $scope.building.update(function () {
+                $scope.$apply(function () {
+                    $location.path('/view/' + $scope.building.Id);
+                });
+
+            });
+        } else {
+            Building.save($scope.building, function (building) {
+                var p = building;
+                $scope.$apply(function () {
+                    $location.path('/view/' + p.Id || p.id);
+                });
+            });
+        }
+    };
+
+    $scope.doCancel = function () {
+        if ($scope.building.Id) {
+            $location.path('/view/' + $scope.building.Id);
+        } else {
+            $location.path('/buildings');
         }
     }
 }

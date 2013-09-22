@@ -4,7 +4,7 @@
 //var app = angular.module('AngularSFDemo', ['AngularForce', 'AngularForceObjectFactory', 'Contact', 'ui.bootstrap.dropdownToggle']);
 //app.constant('SFConfig', getSFConfig());
 
-var app = angular.module('AngularSFDemo', ['AngularForce', 'AngularForceObjectFactory', 'Contact', 'ui.bootstrap.dropdownToggle']);
+var app = angular.module('AngularSFDemo', ['AngularForce', 'AngularForceObjectFactory', 'Contact', 'Building', 'ui.bootstrap.dropdownToggle']);
 var SFConfig = getSFConfig();
 
 SFConfig.maxListSize = 25;
@@ -62,7 +62,7 @@ app.config(function ($routeProvider) {
         when('/view/:contactId', {controller: ContactViewCtrl, templateUrl: 'partials/contact/view.html'}).
         when('/edit/:contactId', {controller: ContactDetailCtrl, templateUrl: 'partials/contact/edit.html'}).
         when('/new', {controller: ContactDetailCtrl, templateUrl: 'partials/contact/edit.html'}).
-        // when('/properties', {controller: PropertyListCtrl, templateUrl: 'partials/property/list.html'}).
+        when('/buildings', {controller: BuildingListCtrl, templateUrl: 'partials/building/list.html'}).
         // when('/view/:propertyId', {controller: PropertyViewCtrl, templateUrl: 'partials/property/view.html'}).
         // when('/edit/:propertyId', {controller: PropertyDetailCtrl, templateUrl: 'partials/property/edit.html'}).
         // when('/new', {controller: PropertyDetailCtrl, templateUrl: 'partials/property/edit.html'}).

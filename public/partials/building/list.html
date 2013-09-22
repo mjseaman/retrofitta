@@ -1,0 +1,67 @@
+<div ng-show="isWorking()">
+    <p>Working</p>
+</div>
+
+<div ng-show="!isWorking()">
+    <!-- This div is only displayed in desktops (see below for mobile phones)-->
+    <div class="hidden-xs">
+        <div style="float: left">
+            <div style="margin-bottom: 10px;">
+                <input type="text" ng-model="searchTerm" class="search-query" placeholder="Search">
+
+                <p class="btn btn-primary" ng-click="doSearch(searchString)">Go</p>
+            </div>
+        </div>
+
+        <div style="float: right">
+            <a href="#/new" class="btn btn-primary">New</a>
+        </div>
+
+
+        <table width="80%" class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Zip Code</th>
+                <th class='hidden-xs'>Class</th>
+                <th>Climate</th>
+                <th>Floor Area</th>
+                <th class='hidden-xs'>Heating</th>
+                <th>Cooling</th>
+                <th class='hidden-xs'>Windows</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr ng-repeat="property in properties">
+                <td class='hidden-xs'>{{property.Id}}</td>
+                <td><a href="#/view/{{property.Id}}">{{property.FirstName}} {{property.LastName}}</a></td>
+                <td>{{property.Account.Name}}</td>
+                <td class='hidden-xs'>{{property.Title}}</td>
+                <td>{{property.Phone}}</td>
+                <td class='hidden-xs'>{{property.Email}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- This div is only displayed in mobile phones (see above for desktops) -->
+    <div class="visible-xs">
+        <form class="form-inline">
+            <input type="text" ng-model="searchTerm" class="input-medium search-query" placeholder="Search">
+            <button ng-click="doSearch(searchString)" class="btn btn-primary">Go</button>
+            <button ng-click="doCreate()" class="btn btn-default">&nbsp;+&nbsp;</button>
+        </form>
+
+        <table class="table">
+            <tr ng-click="doView(property.Id)" ng-repeat="property in properties">
+                <td> {{property.name__c}}, {{property.zip_code__c}}
+                    <br/>
+                    <small><i>{{property.climate_zone__c}}</i></small>
+                </td>
+                <td><i class="icon-chevron-right"></i></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
