@@ -4,6 +4,15 @@
  *
  *  PS: This module is injected into ListCtrl, EditCtrl etc. controllers to further consume the object.
  */
+function quickHideAddressBar() {
+    setTimeout(function() {
+        if(window.pageYOffset !== 0) return;
+        window.scrollTo(0, window.pageYOffset + 1);
+
+    }, 1000);
+
+}
+
 angular.module('Contact', []).factory('Contact', function (AngularForceObjectFactory) {
     //Describe the contact object
     console.log("in contact module");
@@ -33,6 +42,8 @@ angular.module('Building__c', []).factory('Building__c', function (AngularForceO
 
     return Building__c;
 });
+
+
 
 
 function HomeCtrl($scope, AngularForce, $location, $route) {
@@ -353,6 +364,7 @@ function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Build
             $location.path('/buildings');
         }
     }
+
 
 // function lblpost($scope, $http) {
 //     console.log("IN LBLPOST");
