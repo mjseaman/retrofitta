@@ -356,8 +356,6 @@ angular.module('AngularForceObjectFactory', []).factory('AngularForceObjectFacto
             });
             return newObj;
         };
-
-
         return AngularForceObject;
     }
 

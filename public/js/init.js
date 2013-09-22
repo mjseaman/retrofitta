@@ -4,7 +4,7 @@
 //var app = angular.module('AngularSFDemo', ['AngularForce', 'AngularForceObjectFactory', 'Contact', 'ui.bootstrap.dropdownToggle']);
 //app.constant('SFConfig', getSFConfig());
 
-var app = angular.module('AngularSFDemo', ['AngularForce', 'AngularForceObjectFactory', 'Contact', 'Building', 'ui.bootstrap.dropdownToggle']);
+var app = angular.module('AngularSFDemo', ['AngularForce', 'AngularForceObjectFactory', 'Building__c', 'Contact', 'ui.bootstrap.dropdownToggle']);
 var SFConfig = getSFConfig();
 
 SFConfig.maxListSize = 25;

@@ -17,21 +17,21 @@ angular.module('Contact', []).factory('Contact', function (AngularForceObjectFac
     var Contact = AngularForceObjectFactory(objDesc);
 
     return Contact;
-});
+}); 
 
-angular.module('Building', []).factory('Building__c', function (AngularForceObjectFactory) {
+angular.module('Building__c', []).factory('Building__c', function (AngularForceObjectFactory) {
     console.log("in building module");
     //Describe the building object
     var objDesc = {
         type: 'Building__c',
-        fields: ['air_flow_control__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'window_glass_type__c', 'window_glass_layers__c', 'zip_code__c', 'classification_type__c'],
+        fields: ['Name', 'air_flow_control__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'window_glass_type__c', 'window_glass_layers__c', 'zip_code__c', 'classification_type__c'],
         where: '',
         orderBy: 'floor_area__c',
         limit: 20
     };
-    var Building = AngularForceObjectFactory(objDesc);
+    var Building__c = AngularForceObjectFactory(objDesc);
 
-    return Building;
+    return Building__c;
 });
 
 
@@ -229,7 +229,7 @@ function ContactDetailCtrl($scope, AngularForce, $location, $routeParams, Contac
 
 //**************** BUILDING CONTROLLERS ******************//
 
-function BuildingListCtrl($scope, AngularForce, $location, Building) {
+function BuildingListCtrl($scope, AngularForce, $location, Building__c) {
     if (!AngularForce.authenticated()) {
         return $location.path('/home');
     }
@@ -239,7 +239,7 @@ function BuildingListCtrl($scope, AngularForce, $location, Building) {
     $scope.searchTerm = '';
     $scope.working = false;
 
-    Building.query(function (data) {
+    Building__c.query(function (data) {
         $scope.buildings = data.records;
         $scope.$apply();//Required coz sfdc uses jquery.ajax
     }, function (data) {
@@ -251,8 +251,8 @@ function BuildingListCtrl($scope, AngularForce, $location, Building) {
     };
 
     $scope.doSearch = function () {
-        Contact.search($scope.searchTerm, function (data) {
-            $scope.contacts = data;
+        Building__c.search($scope.searchTerm, function (data) {
+            $scope.buildings = data;
             $scope.$apply();//Required coz sfdc uses jquery.ajax
         }, function (data) {
         });

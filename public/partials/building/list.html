@@ -33,13 +33,18 @@
             </thead>
             <tbody>
 
-            <tr ng-repeat="property in properties">
-                <td class='hidden-xs'>{{property.Id}}</td>
-                <td><a href="#/view/{{property.Id}}">{{property.FirstName}} {{property.LastName}}</a></td>
-                <td>{{property.Account.Name}}</td>
-                <td class='hidden-xs'>{{property.Title}}</td>
-                <td>{{property.Phone}}</td>
-                <td class='hidden-xs'>{{property.Email}}</td>
+<!-- ---> In Force.fetchSObjectsFromServer:config={"type":"soql","query":"SELECT air_flow_control__c, Climate_Zone__c, Cooling__c, floor_area__c, Heating__c, wall_insulation_r_value__c, window_glass_type__c, window_glass_layers__c, zip_code__c, classification_type__c FROM Building__c ORDER BY floor_area__c LIMIT 20"}  -->
+
+            <tr ng-repeat="building in buildings">
+                <td class='hidden-xs'>{{building.Name}}</td>
+                <td><a href="#/view/{{building.Id}}">{{building.zip_code__c}} </a></td>
+                <td>{{building.classification_type__c}}</td>
+                <td class='hidden-xs'>{{building.Climate_Zone__c}}</td>
+                <td>{{building.floor_area__c}}</td>
+                <td class='hidden-xs'>{{building.Heating__c}}</td>
+                <td class='hidden-xs'>{{building.Cooling__c}}</td>
+                <td class='hidden-xs'>{{building.window_glass_layers__c}}</td>
+                <td class='hidden-xs'>{{building.window_glass_type__c}}</td>
             </tr>
             </tbody>
         </table>
