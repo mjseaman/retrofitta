@@ -41,10 +41,11 @@ app.get('/index.html', function (req, res) {
 
 app.post('/hop/?*', function(req, res){
  var body = req.body;
+ var headers = req.headers;
  request({'url' : 'https://bpd.lbl.gov/api/v1/analyze/peers/',
            'method': 'POST',
-            'headers': req.headers,
-            'body': req.headers
+            'headers': headers,
+            'body': body
         }).pipe(res);
 });
 
