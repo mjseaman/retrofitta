@@ -57,13 +57,11 @@
 
         <table class="table">
             <tr ng-repeat="building in buildings">
-                <a href="#/buildings/{{building.Id}}/view">{{building.Name}} 
-                    <td> {{building.Name}}, {{building.zip_code__c}}
+                    <td> <a href="#/buildings/{{building.Id}}/view">{{building.Name}}, {{building.zip_code__c}} </a>
                         <br/>
                         <small><i>{{building.Climate_Zone__c}}</i></small>
                     </td>
                     <td><i class="icon-chevron-right"></i></td>
-                </a>
             </tr>
         </table>
     </div>

@@ -327,10 +327,7 @@ function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Build
 
     $scope.save = function () {
         console.log ("in save");
-        lblpost($scope, $http);
-        console.log("SCOPE.PEER:");
-        console.log($scope.peer);
-        console.log("********");
+        // lblpost($scope, $http);
         
         if ($scope.building.Id) {
             $scope.building.update(function () {
@@ -357,21 +354,27 @@ function BuildingDetailCtrl($scope, AngularForce, $location, $routeParams, Build
         }
     }
 
-function lblpost($scope, $http) {
-    console.log("IN LBLPOST");
-  $http({
-        url: '/hop',
-        method: "POST",
-        data: $scope.property,
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'addisonhuddy@gmail.com:22f3c696ca5837bc5c1e525b50740136d28388fd' 
-        }
-    }).success(function (data, status, headers, config) {
-            $scope.peer = data; // assign  $scope.persons here as promise is resolved here 
-        }).error(function (data, status, headers, config) {
-            $scope.status = status;
-        });
-
-}
+// function lblpost($scope, $http) {
+//     console.log("IN LBLPOST");
+//     $scope.building = {
+//         'filters': {
+//             'state': ['CA', 'IL', 'OR'],
+//             'facility_type': ['Retail - Big Box (> 50K sf)']
+//         },
+//         'number_of_bins': 25
+//     };
+//   $http({
+//         url: '/hop',
+//         method: "POST",
+//         body: $scope.building,
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': 'addisonhuddy@gmail.com:22f3c696ca5837bc5c1e525b50740136d28388fd' 
+//         }
+//     }).success(function (data, status, headers, config) {
+//             $scope.peer = data; // assign  $scope.persons here as promise is resolved here 
+//         }).error(function (data, status, headers, config) {
+//             $scope.status = status;
+//         });
+// }
 }
