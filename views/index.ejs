@@ -16,21 +16,19 @@
 
 </head>
 <body ng-app="AngularSFDemo">
-<div  class="navbar navbar-inverse navbar-fixed-top" ng-controller="LoginCtrl">
+<div  class="navbar navbar-fixed-top" ng-controller="LoginCtrl">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="#">Salesforce Contacts</a>
-            <div ng-show="isLoggedIn()" class="btn-group pull-right">
-                <a class="btn dropdown-toggle">
-                    <i class="icon-wrench"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li ng-click="logout()"><a>Log Out</a></li>
-                </ul>
+            <a class="brand" href="#"></a>
+            <div ng-show="isLoggedIn()">
+                <img src="img/retrofitta-logo.png" style="max-height: 50px;">
+                <a ng-click="logout()" class="pull-right" style="margin-top: 3px;">Log Out</a>
             </div>
         </div>
     </div>
 </div> 
+
+
 
 <div class="container">
     <div ng-view></div>
