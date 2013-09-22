@@ -41,11 +41,11 @@ app.get('/index.html', function (req, res) {
 
 app.post('/hop/?*', function(req, res){
  var body = req.body;
- request({'url' : 'lblUrl',
+ request({'url' : 'https://bpd.lbl.gov/api/v1/analyze/peers/',
            'method': 'POST',
-            headers: {},
-            body: body}).pipe(res);
-
+            'headers': req.headers,
+            'body': req.headers
+        }).pipe(res);
 });
 
 app.all('/proxy/?*', function (req, res) {

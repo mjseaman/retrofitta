@@ -223,3 +223,21 @@ function ContactDetailCtrl($scope, AngularForce, $location, $routeParams, Contac
         }
     }
 }
+
+
+function lblpost($scope, $http) {
+  $http({
+        url: '/hop',
+        method: "POST",
+        data: $scope.property,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'addisonhuddy@gmail.com:22f3c696ca5837bc5c1e525b50740136d28388fd' 
+        }
+    }).success(function (data, status, headers, config) {
+            $scope.persons = data; // assign  $scope.persons here as promise is resolved here 
+        }).error(function (data, status, headers, config) {
+            $scope.status = status;
+        });
+
+}
