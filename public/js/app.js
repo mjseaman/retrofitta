@@ -24,7 +24,7 @@ angular.module('Building__c', []).factory('Building__c', function (AngularForceO
     //Describe the building object
     var objDesc = {
         type: 'Building__c',
-        fields: ['Name', 'air_flow_control__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'window_glass_type__c', 'window_glass_layers__c', 'zip_code__c', 'classification_type__c'],
+        fields: ['Name', 'air_flow_control__c', 'Lighting__c', 'Climate_Zone__c', 'Cooling__c', 'floor_area__c', 'Heating__c', 'wall_insulation_r_value__c', 'window_glass_type__c', 'window_glass_layers__c', 'zip_code__c', 'classification_type__c'],
         where: '',
         orderBy: 'floor_area__c',
         limit: 20
