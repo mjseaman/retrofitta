@@ -4,7 +4,7 @@
 
 <div ng-show="!isWorking()">
     <!-- This div is only displayed in desktops (see below for mobile phones)-->
-    <div class="hidden-phone">
+    <div class="hidden-xs">
         <div style="float: left">
             <div style="margin-bottom: 10px;">
                 <input type="text" ng-model="searchTerm" class="search-query" placeholder="Search">
@@ -44,7 +44,7 @@
     </div>
 
     <!-- This div is only displayed in mobile phones (see above for desktops) -->
-    <div class="visible-phone">
+    <div class="visible-xs">
         <form class="form-inline">
             <input type="text" ng-model="searchTerm" class="input-medium search-query" placeholder="Search">
             <button ng-click="doSearch(searchString)" class="btn btn-primary">Go</button>
